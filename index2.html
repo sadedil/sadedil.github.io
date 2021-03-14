@@ -1,0 +1,25 @@
+<!-- ref: https://stackoverflow.com/a/33715787/1078404 -->
+<style>
+    body { margin: 0; padding: 0; }
+    iframe { margin-left: 2vw; margin-top: 2vh; height: 90vh; width: 90vw; }
+</style>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<iframe srcdoc="" frameborder="0" scrolling="no"></iframe>
+
+<script>
+    $(function() {
+        $.get("https://docs.google.com/document/d/e/2PACX-1vRPBVDYbtXmmyEQTTeGeHitFNfXSNdo8AaI0mennMI4tvlrWg0_EDjWSOZODKJgZopwCdApGUbxIeO0/pub?embedded=true", function(html) {
+            var contents = $("iframe").contents();
+
+            contents.find("html").html(html);
+
+            setTimeout(function() {
+                contents.find('a[href^="http://"]').attr("target", "_blank");
+                contents.find('a[href^="https://"]').attr("target", "_blank");
+            }, 1000); // Actually not sure if timeout is required here...
+        });
+    });
+</script>
